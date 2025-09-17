@@ -1,9 +1,11 @@
-import Link from "next/link";
-import DarkModeToggle from "./DarkModeToggle";
-import { Button } from "./ui/button";
-import { BookMarkedIcon, BookOpen } from "lucide-react";
+"use client"
+
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { BookMarkedIcon, BookOpen } from "lucide-react";
+import Link from "next/link";
 import SearchInput from "./SearchInput";
+import { Button } from "./ui/button";
+import DarkModeToggle from "./DarkModeToggle";
 
 function Header() {
   return (

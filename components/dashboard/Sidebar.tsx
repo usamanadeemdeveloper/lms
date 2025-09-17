@@ -23,7 +23,7 @@ import {
   GetCompletionsQueryResult,
   Module,
 } from "@/sanity.types";
-import { useSidebar } from "@/components/providers/sidebar-provider";
+import { useSidebar } from "@/components/providers/SiderbarProvider";
 import { useEffect, useState } from "react";
 import {
   Tooltip,

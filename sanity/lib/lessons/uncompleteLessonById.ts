@@ -1,6 +1,7 @@
+import { ContentSourceMap, groq } from "next-sanity";
 import { client } from "../adminClient";
 import { sanityFetch } from "../live";
-import groq from "groq";
+import { GetStudentByClerkIdQueryResult } from "@/sanity.types";
 
 interface UncompleteLessonParams {
   lessonId: string;
@@ -12,7 +13,11 @@ export async function uncompleteLessonById({
   clerkId,
 }: UncompleteLessonParams) {
   // Get Sanity student ID from Clerk ID
-  const student = await sanityFetch({
+  const student: {
+    data: GetStudentByClerkIdQueryResult;
+    sourceMap: ContentSourceMap | null;
+    tags: string[];
+  } = await sanityFetch({
     query: groq`*[_type == "student" && clerkId == $clerkId][0]._id`,
     params: { clerkId },
   });

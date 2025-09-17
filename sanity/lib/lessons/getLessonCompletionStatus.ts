@@ -1,4 +1,4 @@
-import { defineQuery } from "groq";
+import { defineQuery } from "next-sanity";
 import { sanityFetch } from "../live";
 import { getStudentByClerkId } from "../student/getStudentByClerkId";
 
@@ -9,7 +9,7 @@ export async function getLessonCompletionStatus(
   // First get the student's Sanity ID
   const student = await getStudentByClerkId(clerkId);
 
-  if (!student?.data?._id) {
+  if (!student?._id) {
     throw new Error("Student not found");
   }
 
@@ -20,7 +20,7 @@ export async function getLessonCompletionStatus(
 
   const result = await sanityFetch({
     query: completionStatusQuery,
-    params: { studentId: student.data._id, lessonId },
+    params: { studentId: student._id, lessonId },
   });
 
   return result.data !== null;

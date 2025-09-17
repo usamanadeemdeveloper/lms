@@ -1,4 +1,5 @@
-import { defineQuery } from "groq";
+
+import { defineQuery } from "next-sanity";
 import { sanityFetch } from "../live";
 
 export async function getLessonById(id: string) {

@@ -1,15 +1,21 @@
 import { Search } from "lucide-react";
 import { CourseCard } from "@/components/CourseCard";
 import { searchCourses } from "@/sanity/lib/courses/searchCourses";
+import { redirect } from "next/navigation";
 
 interface SearchPageProps {
-  params: Promise<{
-    term: string;
+  searchParams: Promise<{
+    [key: string]: string | string[] | undefined;
   }>;
 }
 
-export default async function SearchPage({ params }: SearchPageProps) {
-  const { term } = await params;
+async function SearchPage({ searchParams }: SearchPageProps) {
+  const term = (await searchParams).term;
+
+  if (!term || typeof term !== "string") {
+    return redirect("/");
+  }
+
   const decodedTerm = decodeURIComponent(term);
   const courses = await searchCourses(decodedTerm);
 
@@ -49,3 +55,5 @@ export default async function SearchPage({ params }: SearchPageProps) {
     </div>
   );
 }
+
+export default SearchPage;
